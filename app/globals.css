@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 255, 0;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.cyberpunk-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyberpunk-button::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-color: inherit;
+}
+
+.cyberpunk-button::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  border-color: inherit;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanline::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background: rgba(0, 255, 0, 0.1);
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch:hover::before,
+.glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch:hover::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  animation: glitch 0.3s ease infinite;
+}
+
+.glitch:hover::after {
+  left: -2px;
+  text-shadow: 1px 0 blue;
+  animation: glitch 0.3s ease infinite reverse;
+}
